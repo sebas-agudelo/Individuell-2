@@ -71,6 +71,7 @@ layout_navbar($dbContext)
     <main>
 
         <h2>Bli kund</h2>
+        <p><?php echo $message?></p>
 
         <form method="post" class="form">
 
