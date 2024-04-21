@@ -19,24 +19,30 @@ layout_header("Start - Compra");
 
     <main>
 
-        
-        <section class="startpage-container">
+        <section class="hero-img-container">
             <article class="hero-img"></article>
-            <h1>MEST KÖPTA BILAR</h1>
+        </section>
 
-
+        <section class="product-list-container">
+<h1>MEST KÖPTA BILAR</h1>
             <?php
             foreach ($dbContext->getPopularyProducts() as $product) { ?>
-                <article class="startpage-content"><a href="/product?id=<?php echo $product->id ?>">
-                        <div class="startpage-img">
-                            <img src="<?php echo $product->img ?>" alt="<?php echo $product->img ?>">
-                        </div>
+                <article class="product-list-content">
 
-                        <div class="favarite-details-content">
-                            <h3><?php echo $product->title ?></h3>
+
+                    <img src="<?php echo $product->img ?>" alt="<?php echo $product->img ?>">
+
+                    <div class="product-list-details">
+                        <h3><?php echo $product->title ?></h3>
+                        <div class="product-list-price-btn">
+                            <h4><?php echo $product->price, ' kr' ?></h4>
                             <button><a href="/product?id=<?php echo $product->id ?>">Läs mer</a></button>
                         </div>
-            </a></article>
+                    </div>
+
+
+                    </a>
+                </article>
             <?php } ?>
         </section>
     </main>

@@ -67,37 +67,52 @@ layout_header("Bli kund");
 <?php
 layout_navbar($dbContext)
     ?>
+
 <body>
     <main>
 
-        <h2>Bli kund</h2>
-        <p><?php echo $message?></p>
+        <section class="login-register-container">
 
-        <form method="post" class="form">
+            <article>
 
-            <input class="form-control" type="text" name="email" value="<?php echo $email ?>"
-                placeholder="cris@gmail.com">
-            <span><?php echo $v->get_error_message('email'); ?></span>
+                <h2>Bli kund</h2>
+                <p><?php echo $message ?></p>
 
+                <form method="post" class="form">
 
-            <input class="form-control" type="text" name="username" value="<?php echo $username ?>"
-                placeholder="Cristiano Ronaldo" />
-            <span><?php echo $v->get_error_message('username'); ?></span>
+                    <div class="login-register-input">
+                        <label>E-postadress</label>
+                        <input class="form-control" type="text" name="email" value="<?php echo $email ?>"
+                            placeholder="cris@gmail.com">
+                        <span><?php echo $v->get_error_message('email'); ?></span>
+                    </div>
 
+                    <div class="login-register-input">
+                        <label>För & efternamn</label>
+                        <input class="form-control" type="text" name="username" value="<?php echo $username ?>"
+                            placeholder="Cristiano Ronaldo" />
+                        <span><?php echo $v->get_error_message('username'); ?></span>
+                    </div>
 
-            <input class="form-control" type="password" name="password" placeholder="Lösenord" />
-            <span><?php echo $passwordMessage ?></span>
-            <span><?php echo $v->get_error_message('password'); ?></span>
+                    <div class="login-register-input">
+                        <label>Lösenord</label>
+                        <input class="form-control" type="password" name="password" placeholder="Lösenord" />
+                        <span><?php echo $v->get_error_message('password'), $passwordMessage ?></span>
+                    </div>
 
+                    <div class="login-register-input">
+                        <label>Bekräfta lösenord</label>
+                        <input class="form-control" type="password" name="confirm_password"
+                            placeholder="Bekräfta lösenord" />
+                        <?php echo $v->get_error_message('confirm_password'), $passwordMessage ?>
 
-            <input class="form-control" type="password" name="confirm_password" placeholder="Bekräfta lösenord" />
-            <span><?php echo $passwordMessage ?></span>
+                    </div>
 
-            <button>Bli kund</button>
-            &nbsp;&nbsp;&nbsp;
-            <a href="/" class="listbutton">Cancel</a>
+                    <button>Bli kund</button>
 
-        </form>
+                </form>
+            </article>
+        </section>
     </main>
 
 

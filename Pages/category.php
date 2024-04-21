@@ -25,36 +25,36 @@ layout_navbar($dbContext)
 <body>
     <main>
 
-        <h1 class="category-h1">Bilar i lager</h1>
-
         
+        
+        <h1 class="category-h1">Bilar i lager</h1>
         <?php
         layout_Sorts($dbContext);
         ?>
 
-        <section class="category-container">
+        <section class="product-list-container">
 
 
         
             <?php foreach ($dbContext->searchProducts($sortCol, $sortOrder, $q, $categoryId) as $product) {
                 ?>
-                <div class="category-content">
+                <article class="product-list-content">
                    
-                        <div class="img-container">
+                    
                             <img src="<?php echo $product->img ?>" alt="<?php echo $product->img ?>">
-                        </div>
+                  
 
-                        <div class="category-details">
+                        <div class="product-list-details">
                             <h3><?php echo $product->title ?></h3>
                             <p><?php echo 'Årsmodell: ', $product->model?></p>
                             <P><?php echo 'Färg: ', $product->color ?></P>
-                            <h4><?php echo 'Pris: ', $product->price, ' kr' ?></h4>
+                            
+                            <div class="product-list-price-btn">
+                                <h4><?php echo $product->price, ' kr' ?></h4>
+                                <button><a href="/product?id=<?php echo $product->id ?>">Läs mer</a></button>
+                            </div>
                         </div>
-
-                        <div class="btn-container">
-                            <button><a href="/product?id=<?php echo $product->id ?>">Läs mer</a></button>
-                        </div>
-                </div>
+                </article>
 
             <?php } ?>
         </section>

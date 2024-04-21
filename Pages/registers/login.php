@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $message = "Kolla om du använde rätt e-postadress och lösenord.";
 
     }
-    
+
 }
 
 layout_header("Logga in");
@@ -43,35 +43,39 @@ layout_navbar($dbContext)
     <main>
         <?php echo $dbContext->getAllUsersFromDatabase()->getAuth()->isLoggedIn(); ?>
 
-        <section class="login-container">
+        <section class="login-register-container">
 
-        <h1>Välkommen tillbaka</h1>
+            <article>
+                <h1>Välkommen tillbaka</h1>
 
-        <?php 
-        if($message){
-            ?>
-                 <h3><?php echo $message ?></h3>
-            <?php
-        }
-        ?>
+                <?php
+                if ($message) {
+                    ?>
+                    <h3><?php echo $message ?></h3>
+                    <?php
+                }
+                ?>
 
-            <form method="POST">
+                <form method="POST">
 
-                <div class="e-post">
-                    <label for="name">E-postadress</label>
-                    <input type="email" name="email" autofocus>
-                    <span><?php echo $v->get_error_message('email'); ?></span>
-                </div>
-                <div class="password">
-                    <label for="password">Lösenord</label>
-                    <input type="password" name="password">
-                    <span><?php echo $v->get_error_message('password'); ?></span>
-                </div>
+                    <div class="login-register-input">
+                        <label>E-postadress</label>
+                        <input class="form-control" type="text" name="email" value="<?php echo $email ?>"
+                            placeholder="cris@gmail.com">
+                        <span><?php echo $v->get_error_message('email'); ?></span>
+                    </div>
 
-                <button>Logga in</button>
-                <a href="" class="forget-password">Glömt lösenord</a>
+                    <div class="login-register-input">
+                        <label>Lösenord</label>
+                        <input class="form-control" type="password" name="password" placeholder="Lösenord" />
+                        <span><?php echo $v->get_error_message('password');?></span>
+                    </div>
 
-            </form>
+                    <button>Logga in</button>
+                    <a href="" class="forget-password">Glömt lösenord</a>
+
+                </form>
+            </article>
         </section>
     </main>
 </body>
