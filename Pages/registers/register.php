@@ -5,12 +5,12 @@ require_once ("Pages/validator.php");
 require_once ("Models/Database.php");
 $dbContext = new DbContext();
 
-$message = "";
-$passwordMessage = "";
+$errorMessage = "";
+$passwordNotMatch= "";
 $email = "";
 $username = "";
 
-$v = new Validator($_POST);
+$validator = new Validator($_POST);
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $email = $_POST['email'];
@@ -19,12 +19,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $confirm_password = $_POST['confirm_password'];
 
 
-    if ($v->is_valid() && $password === $confirm_password) {
+    if ($validator->is_valid() && $password === $confirm_password) {
 
-        $v->field('email')->required()->email();
-        $v->field('username')->required();
-        $v->field('password')->required();
-        $v->field('confirm_password')->required();
+        $validator->field('email')->required()->email();
+        $validator->field('username')->required()->alpha();
+        $validator->field('password')->required()->min_len(6)->max_len(30);
+        $validator->field('confirm_password')->required()->min_len(6)->max_len(30);
 
         try {
             $userId = $dbContext->getAllUsersFromDatabase()->getAuth()->register($email, $password, $username, function ($selector, $token) {
@@ -52,12 +52,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: /registerOut');
             exit;
 
-        } catch (Exception $e) {
-            $message = "Något har gått fel";
+        } catch (\Delight\Auth\UserAlreadyExistsException $e) {
+            $errorMessage = "E-postadressen finns redan registrerad";
+        } catch (\Exception $e) {
+            $errorMessage = "Något har gått fel. Kolla om du har fyllt i allting korrekt!!";
         }
-    } else if ($password != $confirm_password) {
-        $passwordMessage = "Lösenordet stämmer inte";
-    }
+
+        } else if ($password != $confirm_password) {
+            $passwordNotMatch = "Lösenordet matchar inte";
+        }
 }
 
 layout_header("Bli kund");
@@ -76,7 +79,13 @@ layout_navbar($dbContext)
             <article>
 
                 <h2>Bli kund</h2>
-                <p><?php echo $message ?></p>
+                <?php
+                if ($errorMessage) {
+                    ?>
+                      <h3 class="errorMessage"><?php echo $errorMessage ?></h3>
+                    <?php
+                }
+                ?>
 
                 <form method="post" class="form">
 
@@ -84,27 +93,27 @@ layout_navbar($dbContext)
                         <label>E-postadress</label>
                         <input class="form-control" type="text" name="email" value="<?php echo $email ?>"
                             placeholder="cris@gmail.com">
-                        <span><?php echo $v->get_error_message('email'); ?></span>
+                        <span><?php echo $validator->get_error_message('email'); ?></span>
                     </div>
 
                     <div class="login-register-input">
                         <label>För & efternamn</label>
                         <input class="form-control" type="text" name="username" value="<?php echo $username ?>"
                             placeholder="Cristiano Ronaldo" />
-                        <span><?php echo $v->get_error_message('username'); ?></span>
+                        <span><?php echo $validator->get_error_message('username'); ?></span>
                     </div>
 
                     <div class="login-register-input">
                         <label>Lösenord</label>
                         <input class="form-control" type="password" name="password" placeholder="Lösenord" />
-                        <span><?php echo $v->get_error_message('password'), $passwordMessage ?></span>
+                        <span><?php echo $validator->get_error_message('password'), $passwordNotMatch ?></span>
                     </div>
 
                     <div class="login-register-input">
                         <label>Bekräfta lösenord</label>
                         <input class="form-control" type="password" name="confirm_password"
                             placeholder="Bekräfta lösenord" />
-                        <?php echo $v->get_error_message('confirm_password'), $passwordMessage ?>
+                        <?php echo $validator->get_error_message('confirm_password'), $passwordNotMatch ?>
 
                     </div>
 

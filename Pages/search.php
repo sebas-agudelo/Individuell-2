@@ -7,7 +7,7 @@ $dbContext = new DBContext();
 $sortOrder = $_GET['sortOrder'] ?? "";
 $sortCol = $_GET['sortCol'] ?? "";
 $q = $_GET['q'] ?? "";
-layout_header("Compra");
+layout_header("Compra - Sök");
 ?>
 
 

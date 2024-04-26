@@ -6,9 +6,9 @@ require_once ("Pages/layout/navbar.php");
 require_once ("Models/Database.php");
 $dbContext = new DbContext();
 
-$message = "";
+$errorMessage = "";
 $email = "";
-$password = "";
+
 
 $v = new Validator($_POST);
 
@@ -25,9 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ->login($email, $password);
         header('Location: /');
         exit;
-    } catch (Exception $e) {
-        $message = "Kolla om du använde rätt e-postadress och lösenord.";
-
+    } catch (\Exception $e) {
+        $errorMessage = "Något har gått fel. Kolla om du har fyllt i E-postadressen & lösenordet korrekt!!";
     }
 
 }
@@ -44,12 +43,12 @@ layout_navbar($dbContext)
         <section class="login-register-container">
 
             <article>
-                <h1>Välkommen tillbaka</h1>
+                <h2>Välkommen tillbaka</h2>
 
                 <?php
-                if ($message) {
+                if ($errorMessage) {
                     ?>
-                    <h3><?php echo $message ?></h3>
+                      <h3 class="errorMessage"><?php echo $errorMessage ?></h3>
                     <?php
                 }
                 ?>
@@ -70,7 +69,7 @@ layout_navbar($dbContext)
                     </div>
 
                     <button>Logga in</button>
-                    <a href="" class="forget-password">Glömt lösenord</a>
+               
 
                 </form>
             </article>

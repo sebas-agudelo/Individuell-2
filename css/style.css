@@ -12,6 +12,11 @@ body {
     font-style: normal;
 }
 
+.errorMessage{
+    color: red;
+    margin-bottom: 15px;
+}
+
 /* Header Css */
 header {
     height: 100px;
@@ -377,8 +382,12 @@ footer .social-media-container i {
     flex-direction: column;
     align-items: center;
 
-    /* margin-top: 57px; */
+    margin-top: 30px;
     height: 100vh;
+}
+
+.login-register-container h2{
+    margin-bottom: 15px;
 }
 
 .login-register-container article {
