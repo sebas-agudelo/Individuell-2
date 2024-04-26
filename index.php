@@ -15,15 +15,8 @@ $router->addRoute('/', function () {
 $router->addRoute('/category', function () {
     require __DIR__ .'/Pages/category.php';
 });
-$router->addRoute('/allProducts', function () {
-    require __DIR__ .'/Pages/allProducts.php';
-});
 $router->addRoute('/product', function () {
     require __DIR__ .'/Pages/product.php';
-});
-
-$router->addRoute('/addProduct', function () {
-    require __DIR__ .'/Pages/addProduct.php';
 });
 $router->addRoute('/search', function () {
     require __DIR__ .'/Pages/search.php';
@@ -37,15 +30,8 @@ $router->addRoute('/logout', function () {
 $router->addRoute('/register', function () {
     require __DIR__ .'/Pages/registers/register.php';
 });
-$router->addRoute('/user', function () {
-    require __DIR__ .'/Pages/user.php';
-});
-
 $router->addRoute('/verify_email', function () {
     require __DIR__ .'/Pages/verify_email.php';
-});
-$router->addRoute('/shoppingcart', function () {
-    require __DIR__ .'/Pages/ShoppingCart.php';
 });
 $router->addRoute('/contact', function () {
     require __DIR__ .'/Pages/contact.php';

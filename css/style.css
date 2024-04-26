@@ -178,6 +178,12 @@ a {
 }
 
 /* Product and search list CSS  */
+
+.category-h1{
+    text-align: center;
+    margin-top: 35px;
+}
+
 .product-list-container {
     width: 80%;
     margin: 0 auto;
@@ -444,12 +450,7 @@ form button:hover {
 }
 
 
-
-
-
-
-
-@media screen and (min-width: 1920px) {
+@media screen and (min-width: 1900px) {
     .product-list-container .product-list-content {
         width: 22%;
         /* border: 1px solid; */

@@ -41,8 +41,6 @@ layout_navbar($dbContext)
 
 <body>
     <main>
-        <?php echo $dbContext->getAllUsersFromDatabase()->getAuth()->isLoggedIn(); ?>
-
         <section class="login-register-container">
 
             <article>
