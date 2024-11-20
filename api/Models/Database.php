@@ -175,7 +175,6 @@ class DbContext
         $this->createProductData('assets/Suvs/Jeep Wrangler.png', 'Jeep Wrangler', 2024, 'Green', 901000, 'SUV BILAR');
 
 
-
         $data = true;
     }
 
@@ -215,11 +214,9 @@ class DbContext
                 REFERENCES Category(id)
             )";
 
-   
 
         $this->pdo->exec($sql);
-
-
+        
         $this->usersDatabase->setupUsers();
         $this->usersDatabase->seedUsers();
 
